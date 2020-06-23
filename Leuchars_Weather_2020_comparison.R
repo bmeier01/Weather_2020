@@ -1,5 +1,5 @@
 #########################################################################################
-# Weather in lockdown - BM                                                              #
+# Weather in lockdown - B Meier                                                         #
 # Metoffice Data Leucars                                                                #
 # https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/leucharsdata.txt #
 #########################################################################################

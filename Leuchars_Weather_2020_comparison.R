@@ -41,32 +41,34 @@ annual_ave_no_2020 <- Leuchars2 %>%
                    ave_frost = round(mean(airfrost_in_days),digits = 2), ave_rain = round(mean(Rainfall_in_mm), digits = 2),
                    ave_sun = round(mean(Sunshine_in_h), digits = 2))
 
+ave_jan_to_april <- as.data.frame(annual_ave_no_2020[1:4,]) # get first 4 months
+
 year_2020 <- Leuchars2 %>% 
   dplyr::filter(Year == 2020) # select gets columns, filter by rows
 
+ave_jan_to_april
 year_2020
-test <- as.data.frame(annual_ave[1:4,])
-test
-# test$Year <- 63
-test$Year <- "since 1957"
-all <- test %>%
+
+ave_jan_to_april$Year <- "since 1957"
+all <- ave_jan_to_april %>%
   dplyr::select(Year, everything())
 colnames(all) <- c("Year", "Month", "Tmax", "Tmin", "Airfrost", "Rainfall", "Sunshine")
 colnames(year_2020) <- colnames(all)
 
 
-x <- rbind(all, year_2020)
-str(x)
-#x$Year <- as.character(x$Year)
+compare_2020 <- rbind(all, year_2020)
+str(compare_2020)
+head(compare_2020)
+#compare_2020$Year <- as.character(compare_2020$Year)
 
-a <- ggplot(data=x, aes(x=Month, y=Rainfall, fill=Year)) +
+a <- ggplot(data=compare_2020, aes(x=Month, y=Rainfall, fill=Year)) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_fill_brewer(palette="Paired") +
   ggtitle("Comparison average monthly rainfall and sunshine for 2020 versus all years since 1957 (Leuchars)") + 
   ylab("Rainfall in mm") +
   theme_minimal()
 
-b <- ggplot(data=x, aes(x=Month, y=Sunshine, fill=Year)) +
+b <- ggplot(data=compare_2020, aes(x=Month, y=Sunshine, fill=Year)) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_fill_brewer(palette="Paired") +
   ylab("Sunshine in hrs") +

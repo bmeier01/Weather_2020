@@ -8,26 +8,23 @@ library(stringr)
 library(gridExtra)
 library(plotly)
 
-setwd("~/Documents/Professional_Development/Projects_2020")
-dat <- readLines("Leuchars_Weather_2020")
-head(dat, 10)
-#test = dat[-(1:6)]
+setwd("../Projects_2020")
+#dat <- readLines("Leuchars_Weather_2020")
+#head(dat, 10)
 
 
-Leuchars <- read.table('Leuchars_Weather_2020', skip = 6, header = T, sep =';') # skip 1st 6 lines!
-head(Leuchars)
-
-
-
-# Now we are talking
+# load file
 Leuchars <- read.table('Leuchars_Weather_2020_clean', skip=2, header = F, stringsAsFactors = F)
 head(Leuchars)
 ncol(Leuchars)
-colnames(Leuchars) <- c("Year", "Month", "max_Temp_in_C", "min_Temp_in_C", "airfrost_in_days", "Rainfall_in_mm", "Sunshine_in_h")
-str(Leuchars)
 nrow(Leuchars)
 
-# remove stars from entries, change chr into num
+colnames(Leuchars) <- c("Year", "Month", "max_Temp_in_C", "min_Temp_in_C", "airfrost_in_days", "Rainfall_in_mm", "Sunshine_in_h")
+
+str(Leuchars)
+View(Leuchars)
+
+# remove stars from temperature entries (indicate ), change chr into num
 Leuchars2 <- Leuchars %>% 
   dplyr::mutate(
     max_Temp_in_C = readr::parse_number(max_Temp_in_C),
@@ -36,7 +33,7 @@ Leuchars2 <- Leuchars %>%
 
 str(Leuchars2)
 
-# average by month using dplyr
+# determine average by month
 annual_ave_no_2020 <- Leuchars2 %>% 
   dplyr::filter(Year != 2020) %>% 
   dplyr::group_by(Month) %>%

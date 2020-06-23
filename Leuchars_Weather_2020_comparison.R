@@ -1,12 +1,13 @@
 #########################################################################################
-# Weather in lockdown - B Meier                                                         #
+# Weather in lockdown - B Meier, May 2020                                                      #
 # Metoffice Data Leucars                                                                #
 # https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/leucharsdata.txt #
 #########################################################################################
 
-library(stringr)
+library(dplyr)
 library(gridExtra)
 library(plotly)
+library(stringr)
 
 setwd("../Projects_2020")
 #dat <- readLines("Leuchars_Weather_2020")
